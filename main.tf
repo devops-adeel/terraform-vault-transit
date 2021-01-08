@@ -1,3 +1,8 @@
+locals {
+  encrypt_member_entity_ids = var.encrypt_entity_ids != [] ? var.encrypt_entity_ids : [vault_identity_entity.default.id]
+  decrypt_member_entity_ids = var.decrypt_entity_ids != [] ? var.decrypt_entity_ids : [vault_identity_entity.default.id]
+}
+
 resource "vault_mount" "default" {
   path        = "transit"
   type        = "transit"
@@ -33,13 +38,25 @@ resource "vault_policy" "decrypt" {
 resource "vault_identity_group" "encrypt" {
   name              = "transit-encrypt"
   type              = "internal"
-  member_entity_ids = var.entity_ids != [] ? var.entity_ids : [vault_identity_entity.default.id]
+  member_entity_ids = local.encrypt_member_entity_ids
   policies = ["default", vault_policy.encrypt.name]
 }
 
 resource "vault_identity_group" "decrypt" {
   name              = "transit-decrypt"
   type              = "internal"
-  member_entity_ids = var.entity_ids != [] ? var.entity_ids : [vault_identity_entity.default.id]
+  member_entity_ids = local.decrypt_member_entity_ids
   policies = ["default", vault_policy.decrypt.name]
+}
+
+resource "vault_identity_entity" "default" {
+  name = "default"
+}
+
+data "vault_identity_group" "encrypt" {
+  group_id = vault_identity_group.encrypt.id
+}
+
+data "vault_identity_group" "decrypt" {
+  group_id = vault_identity_group.decrypt.id
 }

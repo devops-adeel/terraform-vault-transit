@@ -1,9 +1,11 @@
-variable "service_name" {
-  description = "The name of the service consuming the transit key"
-  type        = string
+variable "encrypt_entity_ids" {
+  description = "List of Vault Identity Entity IDs to be a member of Vault Identity Group for encrypting Transit keys"
+  type = list
+  default = []
 }
 
-variable "env" {
-  description = "The name of the environment which the key belongs to"
-  type        = string
+variable "decrypt_entity_ids" {
+  description = "List of Vault Identity Entity IDs to be a member of Vault Identity Group for decrypting Transit keys"
+  type = list
+  default = []
 }
