@@ -12,12 +12,12 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `env` | The name of the environment which the key belongs to | `string` | n/a | yes |
-| `service_name` | The name of the service consuming the transit key | `string` | n/a | yes |
+| `decrypt_entity_ids` | List of Vault Identity Entity IDs to be a member of Vault Identity Group for decrypting Transit keys | `list` | `[]` | no |
+| `encrypt_entity_ids` | List of Vault Identity Entity IDs to be a member of Vault Identity Group for encrypting Transit keys | `list` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `transit_key_keys` | List of key versiuons in the keyring. |
-| `transit_key_latest` | Latest key version available. |
+| `vault_identity_group_decrypt` | JSON data of the Vault Identity Group, including list of member entities |
+| `vault_identity_group_encrypt` | JSON data of the Vault Identity Group, including list of member entities |
