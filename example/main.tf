@@ -31,13 +31,16 @@ provider "vault" {
 }
 
 module "transit" {
-  source = "git::https://github.com/devops-adeel/terraform-vault-transit.git?ref=v0.1.0"
-  decrypt_entity_ids = [module.vault_approle.entity_id]
-  encrypt_entity_ids = [module.vault_approle.entity_id]
+  source = "git::https://github.com/devops-adeel/terraform-vault-transit.git?ref=v0.2.0"
+  providers = {
+    vault = vault.default
+  }
+  decrypt_group_ids = [module.vault_approle.group_id]
+  encrypt_group_ids = [module.vault_approle.group_id]
 }
 
 module "vault_approle" {
-  source = "git::https://github.com/devops-adeel/terraform-vault-approle.git?ref=v0.2.0"
+  source = "git::https://github.com/devops-adeel/terraform-vault-approle.git?ref=v0.4.0"
   providers = {
     vault = vault.default
   }

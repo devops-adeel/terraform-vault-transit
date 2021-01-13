@@ -1,6 +1,6 @@
 locals {
-  encrypt_member_entity_ids = var.encrypt_entity_ids != [] ? var.encrypt_entity_ids : [vault_identity_entity.default.id]
-  decrypt_member_entity_ids = var.decrypt_entity_ids != [] ? var.decrypt_entity_ids : [vault_identity_entity.default.id]
+  encrypt_member_group_ids = var.encrypt_group_ids != [] ? var.encrypt_group_ids : [vault_identity_group.placeholder.id]
+  decrypt_member_group_ids = var.decrypt_group_ids != [] ? var.decrypt_group_ids : [vault_identity_group.placeholder.id]
 }
 
 resource "vault_mount" "default" {
@@ -26,30 +26,30 @@ data "vault_policy_document" "decrypt" {
 }
 
 resource "vault_policy" "encrypt" {
-  name   = "transit-encrypt"
+  name   = "transit-encrypt-tmpl"
   policy = data.vault_policy_document.encrypt.hcl
 }
 
 resource "vault_policy" "decrypt" {
-  name   = "transit-decrypt"
+  name   = "transit-decrypt-tmpl"
   policy = data.vault_policy_document.decrypt.hcl
 }
 
 resource "vault_identity_group" "encrypt" {
-  name              = "transit-encrypt"
-  type              = "internal"
-  member_entity_ids = local.encrypt_member_entity_ids
-  policies = ["default", vault_policy.encrypt.name]
+  name             = "transit-encrypt"
+  type             = "internal"
+  member_group_ids = local.encrypt_member_group_ids
+  policies         = ["default", vault_policy.encrypt.name]
 }
 
 resource "vault_identity_group" "decrypt" {
-  name              = "transit-decrypt"
-  type              = "internal"
-  member_entity_ids = local.decrypt_member_entity_ids
-  policies = ["default", vault_policy.decrypt.name]
+  name             = "transit-decrypt"
+  type             = "internal"
+  member_group_ids = local.decrypt_member_group_ids
+  policies         = ["default", vault_policy.decrypt.name]
 }
 
-resource "vault_identity_entity" "default" {
+resource "vault_identity_group" "placeholder" {
   name = "default"
 }
 

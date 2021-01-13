@@ -12,8 +12,8 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `decrypt_entity_ids` | List of Vault Identity Entity IDs to be a member of Vault Identity Group for decrypting Transit keys | `list` | `[]` | no |
-| `encrypt_entity_ids` | List of Vault Identity Entity IDs to be a member of Vault Identity Group for encrypting Transit keys | `list` | `[]` | no |
+| `decrypt_group_ids` | List of Vault Identity Group IDs to be a member of Vault Identity Group for decrypting Transit keys | `list(any)` | `[]` | no |
+| `encrypt_group_ids` | List of Vault Identity Group IDs to be a member of Vault Identity Group for encrypting Transit keys | `list(any)` | `[]` | no |
 
 ## Outputs
 
