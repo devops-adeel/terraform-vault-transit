@@ -32,6 +32,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           cli_config_credentials_token: ${{ secrets.TFE_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download TF module files
         uses: actions/download-artifact@v2
@@ -53,8 +54,6 @@ jobs:
         id: get
         run: terraform get -update
         working-directory: integration_tests/fixtures
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Terraform Init
         id: init
