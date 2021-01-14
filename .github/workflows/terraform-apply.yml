@@ -53,8 +53,6 @@ jobs:
         id: get
         run: terraform get -update
         working-directory: integration_tests/fixtures
-        env:
-          GIT_ASKPASS: password=${{ secrets.GITHUB_TOKEN }}
 
       - name: Terraform Init
         id: init
