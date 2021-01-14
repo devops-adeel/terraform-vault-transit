@@ -11,7 +11,7 @@ resource "vault_mount" "default" {
 
 data "vault_policy_document" "encrypt" {
   rule {
-    path         = "transit/encrypt/{{identity.groups.names.${vault_identity_group.encrypt.id}.metadata.env}}-{{identity.groups.names.${vault_identity_group.encrypt.id}.metadata.service}}"
+    path         = "transit/encrypt/{{identity.groups.names.transit-encrypt.metadata.env}}-{{identity.groups.names.transit-encrypt.metadata.service}}"
     capabilities = ["update"]
     description  = "Allow the use of encryption action with the transit key"
   }
@@ -19,7 +19,7 @@ data "vault_policy_document" "encrypt" {
 
 data "vault_policy_document" "decrypt" {
   rule {
-    path         = "transit/decrypt/{{identity.groups.names.${vault_identity_group.decrypt.id}.metadata.env}}-{{identity.groups.names.${vault_identity_group.decrypt.id}.metadata.service}}"
+    path         = "transit/decrypt/{{identity.groups.names.transit-decrypt.metadata.env}}-{{identity.groups.names.transit-decrypt.metadata.service}}"
     capabilities = ["update"]
     description  = "Allow the use of decryption action with the transit key"
   }
