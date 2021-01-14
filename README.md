@@ -1,3 +1,10 @@
+# Terraform Vault Transit Backend
+
+This terraform module mounts Vault Transit engine, creates a templated ACL policy with an Identity Group associated.
+
+## Status
+![terraform-plan-approve-apply](https://github.com/devops-adeel/terraform-vault-transit/workflows/terraform-plan-approve-apply/badge.svg?branch=main)
+
 ## Requirements
 
 No requirements.
