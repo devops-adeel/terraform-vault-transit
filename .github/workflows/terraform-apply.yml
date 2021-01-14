@@ -53,6 +53,8 @@ jobs:
         id: get
         run: terraform get -update
         working-directory: integration_tests/fixtures
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Terraform Init
         id: init
