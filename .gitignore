@@ -29,4 +29,4 @@ override.tf.json
 # example: *tfplan*
 
 # Local module testing files
-integration_tests/fixtures/module/*.tf
+integration_tests/fixtures/module/*
