@@ -21,7 +21,7 @@ module "transit" {
 }
 
 module "vault_approle" {
-  source = "git::https://github.com/devops-adeel/terraform-vault-approle.git?ref=v0.4.1"
+  source = "git::https://devops-adeel@github.com/devops-adeel/terraform-vault-approle.git?ref=v0.4.1"
   providers = {
     vault = vault.default
   }
