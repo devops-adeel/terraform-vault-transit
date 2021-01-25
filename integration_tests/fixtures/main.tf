@@ -11,7 +11,7 @@ provider "vault" {
   namespace = trimsuffix(vault_namespace.default.id, "/")
 }
 
-module "transit" {
+module "default" {
   source = "./module"
   providers = {
     vault = vault.default
